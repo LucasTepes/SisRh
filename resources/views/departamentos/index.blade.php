@@ -31,13 +31,6 @@
                     <td>
                         <a href="{{ route('departamentos.edit', $departamento->id) }}" title="Editar" class="btn btn-primary"><i class="bi bi-pen"></i></a>
                         <a href="#" title="Deletar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $departamento->id }}"><i class="bi bi-trash"></i></a>
-                        {{-- Inserir o componente modal na view --}}
-                        <x-modal-delete>
-                            <x-slot name="id">{{ $departamento->id }}</x-slot>
-                            <x-slot name="tipo">departamento</x-slot>
-                            <x-slot name="nome">{{ $departamento->nome }}</x-slot>
-                            <x-slot name="rota">departamentos.destroy</x-slot>
-                        </x-modal-delete>
                     </td>
                 </tr>
             @endforeach
