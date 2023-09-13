@@ -30,6 +30,13 @@
             @foreach ($funcionarios as $funcionario)
                 <tr class="text-center align-middle">
                     <th scope="row">{{ $funcionario->id }}</th>
+                    <td>
+                        @if (empty($funcionario->foto))
+                            <img src="/images/sombra_funcionario.jpg" alt="Foto" class="img-thumbnail" width="70px">
+                        @else
+                            <img src="{{ url("storage/funcionarios/$funcionario->foto") }}" alt="Foto" class="img-thumbnail" width="70px">
+                        @endif
+                    </td>
                     <td>{{ $funcionario->nome }}</td>
                     <td>{{ $funcionario->cargo->descricao }}</td>
                     <td>{{ $funcionario->departamento->nome }}</td>

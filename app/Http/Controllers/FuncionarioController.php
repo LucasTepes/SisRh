@@ -97,14 +97,14 @@ class FuncionarioController extends Controller
 
         $funcionario = Funcionario::find($id);
 
-        if($request->hasFile('foto')){
-            Storage::delete('public/funcionarios/'.$funcionario['foto']);
+        if ($request->hasFile('foto')) {
+            Storage::delete('public/funcionarios/' . $funcionario['foto']);
             $input['foto'] = $this->uploadFoto($request->foto);
         }
 
         $funcionario->fill($input);
         $funcionario->save();
-        return redirect()->route('funcionarios.index')->with('sucesso','Funcionário alterado com sucesso!');
+        return redirect()->route('funcionarios.index')->with('sucesso', 'Funcionário alterado com sucesso!');
     }
 
     /**
@@ -116,7 +116,7 @@ class FuncionarioController extends Controller
 
         // Exclui a foto do funcionário
         if ($funcionario['foto'] != null) {
-            Storage::delete('public/funcionarios/'.$funcionario['foto']);
+            Storage::delete('public/funcionarios/' . $funcionario['foto']);
         }
         // Apagando o registro no banco de dados
         $funcionario->delete();
