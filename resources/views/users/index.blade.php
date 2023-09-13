@@ -20,7 +20,6 @@
             <tr class="text-center">
                 <th scope="col">ID</th>
                 <th scope="col">Usuário</th>
-                <th scope="col">Password</th>
                 <th scope="col">E-mail</th>
                 <th scope="col" width="110px">Ações</th>
             </tr>
@@ -30,7 +29,6 @@
                 <tr class="text-center align-middle">
                     <th scope="row">{{ $user->id }}</th>
                     <td>{{ $user->name }}</td>
-                    <td>{{ $user->password }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
                         <a href="{{ route('users.edit', $user->id) }}" title="Editar" class="btn btn-primary"><i class="bi bi-pen"></i></a>
