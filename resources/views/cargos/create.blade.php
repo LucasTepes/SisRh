@@ -10,7 +10,7 @@
         @csrf
         @include('cargos.partials.form')
         <div class="col-12">
-            <button type="submit" class="btn btn-success">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
             <a href="{{ route('cargos.index') }}" class="btn btn-danger">Cancelar</a>
         </div>
     </form>
