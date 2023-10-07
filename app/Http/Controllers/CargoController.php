@@ -10,12 +10,13 @@ class CargoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cargos = Cargo::all()->sortBy('descricao');
+        $cargos = Cargo::where('descricao', 'like', '%'.$request->Busca.'%' )->orderBy('descricao', 'asc')->paginate(3);
+        $totalCargos = Cargo::all()->count();
 
         // Receber os dados do banco através do model
-        return view('cargos.index', compact('cargos'));
+        return view('cargos.index', compact('cargos', 'totalCargos'));
     }
 
     /**

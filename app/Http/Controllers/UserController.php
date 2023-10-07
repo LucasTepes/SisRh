@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         $input = $request->toArray(); //Array que recebe os valores dos campos da view através do objeto request
         $input['password'] = bcrypt($input['password']); // Linha que criptografa a senha do usuário com o método bcrypt, antes de guardar no banco
-        
+
         User::create($input);
         return redirect()->route('users.index')->with('sucesso', 'Usuário cadastrado com sucesso');
     }
@@ -58,7 +58,6 @@ class UserController extends Controller
            }else{
             $input['password'] = $user['password'];
            }
-           
     }
 
     public function destroy(string $id)
