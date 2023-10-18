@@ -49,7 +49,9 @@
         <option value="">--</option>
         @foreach ($cargos as $cargo)
             <option value="{{ $cargo->id }}"
-                @if (isset($funcionario->cargo_id)) @selected($funcionario->cargo_id == $cargo->id) @endif>
+                @if (isset($funcionario->cargo_id))
+                    @selected($funcionario->cargo_id == $cargo->id)
+                @endif>
                 {{ $cargo->descricao }}
             </option>
         @endforeach

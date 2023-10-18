@@ -5,10 +5,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CargoController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\LoginController;
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', [LoginController::class, 'index'])->name('login.index');
+Route::post('/auth', [LoginController::class, 'auth'])->name('login.auth');
+Route::get('/logout', [LoginController::class, 'logout'])->name('login.logout');
 
 // rotas para as funções e telas de Funcionarios
 Route::get('/funcionarios', [FuncionarioController::class, 'index'])->name('funcionarios.index');
@@ -40,8 +41,4 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
-
-
-
-
 
