@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class CargoController extends Controller
 {
+
+    //verificar se o usuario está logado no sistema
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
