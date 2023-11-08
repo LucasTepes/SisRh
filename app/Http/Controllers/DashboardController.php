@@ -23,11 +23,10 @@ class DashboardController extends Controller
         $somaSalarios = Funcionario::where('status','on')->sum('salario');
 
         // Dados departamentos
-        $departamentos = DEpartamento::all()->sortBy('nome');
-        foreach($departamentos as $departamento){
-            $nomeDepartamento[] = "'".$departamento->nome."'";
-        }
+        $departamentos = Departamento::all()->sortBy('nome');
+        $cargos = Cargo::all()->sortBy('descricao');
 
-        return view('dashborad.index', compact('totalFuncionarios', 'totalCargos', 'totalDepartamentos', 'somaSalarios'));
+        return view('dashborad.index', compact('totalFuncionarios', 'totalCargos', 'totalDepartamentos',
+                                                'somaSalarios', 'departamentos', 'cargos'));
     }
 }

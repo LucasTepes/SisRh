@@ -9,7 +9,9 @@ class Departamento extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
-        'nome'
-    ];
+    protected $fillable=['nome'];
+
+    public function funcionariosAtivos(){
+        return $this->hasMany(Funcionario::class)->where('status','on');
+    }
 }
