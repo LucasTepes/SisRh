@@ -13,11 +13,14 @@
     <input type="email" class="form-control" id="email" name="email" value="{{ $user->email ?? '' }}">
 </div>
 
-<div class="col-md-6">
-    <label for="email" class="form-label">Tipo</label>
-    <select name="tipo" id="tipo" class="form-control">
-        <option value="admin">--</option>
-        <option value="admin">admin</option>
-        <option value="admin">usuario</option>
-    </select>
-</div>
+
+@can('type-user')
+    <div class="col-md-6">
+        <label for="email" class="form-label">Tipo</label>
+        <select name="tipo" id="tipo" class="form-control">
+            <option value="admin">--</option>
+            <option value="admin">admin</option>
+            <option value="admin">usuario</option>
+        </select>
+    </div>
+@endcan

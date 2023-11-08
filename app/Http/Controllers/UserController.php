@@ -77,15 +77,22 @@ class UserController extends Controller
 
         $user = User::find($id);
 
-        $user->fill($input);
-        $user->save();
-        return redirect()->route('users.index')->with('sucesso','Usuário alterado com sucesso!');
-
         if($input['password'] != null){
             $input['password'] = bcrypt($input['password']);
            }else{
             $input['password'] = $user['password'];
            }
+
+        $user->fill($input);
+        $user->save();
+
+        if($user->tipo == "admin"){
+            return redirect()->route('users.index')->with('sucesso','Usuário alterado com sucesso!');
+        }else{
+            return redirect()->route('users.edit', $user->id)->with('sucesso','Usuário alterado com sucesso!');
+        }
+
+
     }
 
     public function destroy(string $id)
