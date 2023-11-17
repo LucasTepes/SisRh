@@ -3,7 +3,6 @@
 @section('title', 'SisRH - Funcionários')
 
 @section('content')
-
     <x-btn-create>
         <x-slot name="route">{{ @route('funcionarios.create') }}</x-slot>
         <x-slot name="title">Cadastrar Funcionário</x-slot>
@@ -12,7 +11,7 @@
     <h1 class="fs-2 mb-3">Lista de Funcionários</h1>
 
     <p>Total de Funcionarios: {{ $totalFuncionarios }}</p>
-    
+
     @if (Session::get('sucesso'))
         <div class="alert alert-success text-center">{{ Session::get('sucesso') }}</div>
     @endif

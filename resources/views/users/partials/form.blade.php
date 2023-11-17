@@ -16,11 +16,12 @@
 
 @can('type-user')
     <div class="col-md-6">
-        <label for="email" class="form-label">Tipo</label>
-        <select name="tipo" id="tipo" class="form-control">
-            <option value="admin">--</option>
-            <option value="admin">admin</option>
-            <option value="admin">usuario</option>
+        <label for="tipo" class="form-label">Tipo</label>
+        <select name="tipo" id="tipo" class="form-select" required>
+            <option value="">--</option>
+            <option value="admin" @if (isset($user->tipo)) @selected($user->tipo == 'admin') @endif>Admin</option>
+            <option value="usuario" @if (isset($user->tipo)) @selected($user->tipo == 'usuario') @endif>Usuário
+            </option>
         </select>
     </div>
 @endcan

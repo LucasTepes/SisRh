@@ -72,7 +72,18 @@
     <input type="date" class="form-control" id="data_desligamento" name="data_desligamento"
         value="{{ $funcionario->data_desligamento ?? '' }}">
 </div>
-<div class="col-md-10">
+<div class="col-md-6">
     <label for="foto" class="form-label">Foto</label>
     <input type="file" class="form-control" id="foto" name="foto">
+</div>
+<div class="col-md-4">
+    <label for="beneficios">Beneficios</label>
+    <div>
+        @foreach ($beneficios as $beneficio)
+            <input type="checkbox" value="{{ $beneficio->id }}" name="beneficios[]"
+            @if (isset($funcionario->beneficios))
+                @checked(in_array($beneficio->id, $beneficio_selecionados))
+            @endif> {{ $beneficio->descricao }} <br>
+        @endforeach
+    </div>
 </div>

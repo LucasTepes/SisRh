@@ -11,7 +11,7 @@
 </head>
 
 <body class="d-flex flex-nowrap min-vh-100">
-    <x-sidebar />
+    <x-sidebar></x-sidebar>
     <main class="container-fluid p-4 bg-light">
         <div class="bg-white p-5 shadow h-100">
             @yield('content')

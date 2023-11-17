@@ -76,6 +76,7 @@ class DepartamentoController extends Controller
     public function update(Request $request, string $id)
     {
         $input = $request->toArray();
+        //dd($input);
 
         $departamento = Departamento::find($id);
 

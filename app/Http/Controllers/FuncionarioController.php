@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cargo;
+use App\Models\Beneficio;
 use App\Models\Funcionario;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
@@ -37,7 +38,8 @@ class FuncionarioController extends Controller
         // Retornar o formulário de cadastro
         $departamentos = Departamento::all()->sortBy('nome');
         $cargos = Cargo::all()->sortBy('descricao');
-        return view('funcionarios.create', compact('departamentos', 'cargos'));
+        $beneficios = Beneficio::all()->sortby('descricao');
+        return view('funcionarios.create', compact('departamentos', 'cargos', 'beneficios'));
     }
 
     /**
@@ -46,14 +48,22 @@ class FuncionarioController extends Controller
     public function store(Request $request)
     {
         $input = $request->toArray();
-        $input['user_id'] = 1;
+
+        //Armazena o id do usuário do sistema logado no cadastro do funcionário
+        $input['user_id'] = auth()->user()->id;
 
         if ($request->hasFile('foto')) {
             $input['foto'] = $this->uploadFoto($request->foto);
         }
 
-        Funcionario::create($input);
+        $funcionario = Funcionario::create($input);
+
+        if($request->beneficios){
+            //Cadastro do funcionários com os benefícios
+            $funcionario->beneficios()->attach($request->beneficios);
+        }
         return redirect()->route('funcionarios.index')->with('sucesso', 'Funcionario cadastrado com sucesso');
+
     }
 
     // Função para redimensionar e realizar o upload da foto
@@ -91,7 +101,13 @@ class FuncionarioController extends Controller
         }
         $departamentos = Departamento::all()->sortBy('nome');
         $cargos = Cargo::all()->sortBy('descricao');
-        return view('funcionarios.edit', compact('funcionario', 'departamentos', 'cargos'));
+        $beneficios = Beneficio::all()->sortBy('descricao');
+
+        //Preparar array com os ID dos beneficios do funcionário
+        foreach($funcionario->beneficios AS $beneficio){
+            $beneficio_selecionados[] = $beneficio->id;
+        }
+        return view('funcionarios.edit', compact('funcionario', 'departamentos', 'cargos', 'beneficios', 'beneficio_selecionados'));
     }
 
     /**
