@@ -89,6 +89,11 @@ class CargoController extends Controller
     public function destroy(string $id)
     {
 
-        // Apagando o registro no banco de dados
+        $cargo = Cargo::find($id);
+        $cargo->delete();
+
+        return redirect()->route('cargos.index')->with('sucesso', 'Cargo excluido com sucesso');
+
+
     }
 }

@@ -91,6 +91,10 @@ class DepartamentoController extends Controller
     public function destroy(string $id)
     {
 
-        // Apagando o registro no banco de dados
+        $departamento = Departamento::find($id);
+        $departamento->delete();
+
+        return redirect()->route('departamentos.index')->with('sucesso', 'Departamento excluido com sucesso');
+
     }
 }

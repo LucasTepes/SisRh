@@ -107,6 +107,7 @@ class FuncionarioController extends Controller
         foreach($funcionario->beneficios AS $beneficio){
             $beneficio_selecionados[] = $beneficio->id;
         }
+
         return view('funcionarios.edit', compact('funcionario', 'departamentos', 'cargos', 'beneficios', 'beneficio_selecionados'));
     }
 
@@ -118,11 +119,20 @@ class FuncionarioController extends Controller
         $input = $request->toArray();
 
         $funcionario = Funcionario::find($id);
+        //dd($funcionario);
+
+        foreach($funcionario->beneficios AS $beneficio){
+            $beneficio_selecionados[] = $beneficio->id;
+        };
+
+        $funcionario->beneficios()->detach($beneficio_selecionados);
+        $funcionario->beneficios()->attach($request->beneficios);
 
         if ($request->hasFile('foto')) {
             Storage::delete('public/funcionarios/' . $funcionario['foto']);
             $input['foto'] = $this->uploadFoto($request->foto);
         }
+
 
         $funcionario->fill($input);
         $funcionario->save();

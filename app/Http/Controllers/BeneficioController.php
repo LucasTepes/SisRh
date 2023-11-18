@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beneficio;
+use App\Models\beneficio_funcionario;
 use Illuminate\Http\Request;
 
 class BeneficioController extends Controller
@@ -51,8 +52,6 @@ class BeneficioController extends Controller
 
     public function destroy(String $id){
         $beneficio = Beneficio::find($id);
-
-        $beneficio_funcionario = 
 
         $beneficio->delete();
         return redirect()->route('beneficio.index')->with('sucesso','Beneficio deletado com sucesso');

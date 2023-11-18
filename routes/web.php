@@ -29,6 +29,7 @@ Route::get('/departamentos/create', [DepartamentoController::class, 'create'])->
 Route::post('/departamentos', [DepartamentoController::class, 'store'])->name('departamentos.store');
 Route::get('/departamentos/{id}/edit', [DepartamentoController::class, 'edit'])->name('departamentos.edit');
 Route::put('/departamentos/{id}', [DepartamentoController::class, 'update'])->name('departamentos.update');
+Route::delete('/departamentos{id}', [DepartamentoController::class, 'destroy'])->name('departamentos.destroy');
 
 // rotas para as funções e telas de Cargos
 Route::get('/cargos', [CargoController::class, 'index'])->name('cargos.index');
@@ -36,6 +37,7 @@ Route::get('/cargos/create', [CargoController::class, 'create'])->name('cargos.c
 Route::post('/cargos', [CargoController::class, 'store'])->name('cargos.store');
 Route::get('/cargos/{id}/edit', [CargoController::class, 'edit'])->name('cargos.edit');
 Route::put('/cargos/{id}', [CargoController::class, 'update'])->name('cargos.update');
+Route::delete('/cargos/{id}', [CargoController::class, 'destroy'])->name('cargos.destroy');
 
 
 // rotas para as funções e telas de Usuarios

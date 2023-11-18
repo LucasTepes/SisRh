@@ -48,10 +48,7 @@
     <select id="cargo_id" class="form-select" name="cargo_id" required>
         <option value="">--</option>
         @foreach ($cargos as $cargo)
-            <option value="{{ $cargo->id }}"
-                @if (isset($funcionario->cargo_id))
-                    @selected($funcionario->cargo_id == $cargo->id)
-                @endif>
+            <option value="{{ $cargo->id }}" @if (isset($funcionario->cargo_id)) @selected($funcionario->cargo_id == $cargo->id) @endif>
                 {{ $cargo->descricao }}
             </option>
         @endforeach
@@ -81,9 +78,10 @@
     <div>
         @foreach ($beneficios as $beneficio)
             <input type="checkbox" value="{{ $beneficio->id }}" name="beneficios[]"
-            @if (isset($funcionario->beneficios))
-                @checked(in_array($beneficio->id, $beneficio_selecionados))
-            @endif> {{ $beneficio->descricao }} <br>
+                @if (isset($funcionario->beneficios))
+                    @checked(in_array($beneficio->id, $beneficio_selecionados))
+                @else
+                @endif> {{ $beneficio->descricao }} <br>
         @endforeach
     </div>
 </div>
