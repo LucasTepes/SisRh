@@ -13,6 +13,9 @@ class Beneficio extends Model
         'descricao','status'
     ];
 
-    
+    public function funcionarios(){
+        return $this->belongsToMany(Funcionario::class);
+    }
+
 
 }

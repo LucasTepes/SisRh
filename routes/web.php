@@ -22,6 +22,7 @@ Route::post('/funcionarios', [FuncionarioController::class, 'store'])->name('fun
 Route::get('/funcionarios/{id}/edit', [FuncionarioController::class, 'edit'])->name('funcionarios.edit');
 Route::put('/funcionarios/{id}', [FuncionarioController::class, 'update'])->name('funcionarios.update');
 Route::delete('/funcionarios/{id}', [FuncionarioController::class, 'destroy'])->name('funcionarios.destroy');
+Route::get('/funcionarios/{id}/show', [FuncionarioController::class, 'show'])->name('funcionarios.show');
 
 // rotas para as funções e telas de Departamento
 Route::get('/departamentos', [DepartamentoController::class, 'index'])->name('departamentos.index');

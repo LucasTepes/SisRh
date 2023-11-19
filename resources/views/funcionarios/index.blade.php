@@ -50,6 +50,7 @@
                     <td>
                         <a href="{{ route('funcionarios.edit', $funcionario->id) }}" title="Editar" class="btn btn-primary"><i class="bi bi-pen"></i></a>
                         <a href="#" title="Deletar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $funcionario->id }}"><i class="bi bi-trash"></i></a>
+                        <a href="{{ route('funcionarios.show', $funcionario->id) }}" title="Editar" class="btn btn-info"><i class="bi bi-info-circle"></i></a>
                         {{-- Inserir o componente modal na view --}}
                         <x-modal-delete>
                             <x-slot name="id">{{ $funcionario->id }}</x-slot>

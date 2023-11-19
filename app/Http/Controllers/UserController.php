@@ -15,11 +15,11 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
 
         if (Gate::allows('type-user')) {
-            $users = User::all()->sortBy('name');
+            $users = User::where('name', 'like', '%' . $request->Busca . '%')->orderBy('name', 'asc')->paginate(3);
             // Receber os dados do banco através do model
             return view('users.index', compact('users'));
         } else {

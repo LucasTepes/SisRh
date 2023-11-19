@@ -24,7 +24,7 @@ class FuncionarioController extends Controller
      */
     public function index(Request $request)
     {
-        $funcionarios = Funcionario::where('nome', 'like', '%'.$request->Busca.'%' )->orderBy('nome', 'asc')->paginate(3);
+        $funcionarios = Funcionario::where('nome', 'like', '%' . $request->Busca . '%')->orderBy('nome', 'asc')->paginate(3);
         $totalFuncionarios = Funcionario::all()->count();
         // Receber os dados do banco através do model
         return view('funcionarios.index', compact('funcionarios', 'totalFuncionarios'));
@@ -58,12 +58,11 @@ class FuncionarioController extends Controller
 
         $funcionario = Funcionario::create($input);
 
-        if($request->beneficios){
+        if ($request->beneficios) {
             //Cadastro do funcionários com os benefícios
             $funcionario->beneficios()->attach($request->beneficios);
         }
         return redirect()->route('funcionarios.index')->with('sucesso', 'Funcionario cadastrado com sucesso');
-
     }
 
     // Função para redimensionar e realizar o upload da foto
@@ -86,7 +85,26 @@ class FuncionarioController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $funcionario = Funcionario::find($id);
+
+        if (!$funcionario) {
+            return back();
+        }
+        $departamento = Departamento::find($funcionario['departamento_id']);
+        $cargo = Cargo::find($funcionario['cargo_id']);
+        $beneficio = Beneficio::all()->sortBy('descricao');
+
+        //Preparar array com os ID dos beneficios do funcionário
+        foreach ($funcionario->beneficios as $beneficio) {
+            $beneficio_selecionados[] = $beneficio->id;
+        };
+
+        foreach ($beneficio_selecionados as $key){
+            $lista_beneficios[] = Beneficio::find($key);
+        };
+
+
+        return view('funcionarios.show', compact('funcionario', 'departamento', 'cargo', 'beneficio', 'lista_beneficios'));
     }
 
     /**
@@ -104,7 +122,7 @@ class FuncionarioController extends Controller
         $beneficios = Beneficio::all()->sortBy('descricao');
 
         //Preparar array com os ID dos beneficios do funcionário
-        foreach($funcionario->beneficios AS $beneficio){
+        foreach ($funcionario->beneficios as $beneficio) {
             $beneficio_selecionados[] = $beneficio->id;
         }
 
@@ -117,11 +135,12 @@ class FuncionarioController extends Controller
     public function update(Request $request, string $id)
     {
         $input = $request->toArray();
+        //dd($input);
 
         $funcionario = Funcionario::find($id);
         //dd($funcionario);
 
-        foreach($funcionario->beneficios AS $beneficio){
+        foreach ($funcionario->beneficios as $beneficio) {
             $beneficio_selecionados[] = $beneficio->id;
         };
 
@@ -135,6 +154,7 @@ class FuncionarioController extends Controller
 
 
         $funcionario->fill($input);
+        //dd($funcionario);
         $funcionario->save();
         return redirect()->route('funcionarios.index')->with('sucesso', 'Funcionário alterado com sucesso!');
     }

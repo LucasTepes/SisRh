@@ -11,6 +11,11 @@
 
     <h1 class="fs-2 mb-3">Lista de Usuários</h1>
 
+    <x-busca>
+        <x-slot name="rota">{{ route('users.index') }}</x-slot>
+        <x-slot name="tipo">Usuario</x-slot>
+    </x-busca>
+
     @if (Session::get('sucesso'))
         <div class="alert alert-success text-center">{{ Session::get('sucesso') }}</div>
     @endif
@@ -45,4 +50,6 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $users->links() }}
 @endsection

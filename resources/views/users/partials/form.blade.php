@@ -5,7 +5,7 @@
 
 <div class="col-md-6">
     <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" name="password" @required(!isset($user->password))>
+    <input type="password" class="form-control" id="password" name="password" required>
 </div>
 
 <div class="col-md-6">
